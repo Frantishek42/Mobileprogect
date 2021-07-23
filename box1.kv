@@ -1,0 +1,534 @@
+#:import C kivy.utils.get_color_from_hex
+
+WindowManager:
+
+    FistWindow:
+    FormulaH2:
+    FormulaR:
+
+<FistWindow>:
+
+    name: "fist"
+
+    GridLayout:
+
+        rows:10
+        canvas.before:
+            Color:
+                rgba: C('#022136')
+            Rectangle:
+                pos:self.pos
+                size:self.size
+
+        BoxLayout:
+
+            size_hint: 0.3, 0.4
+            Label:
+                color: C('#022136')
+                font_name: 'AppetiteNew.ttf'
+                text: "Формулы"
+                font_size: 60
+                canvas.before:
+                    Color:
+                        rgba: C('#e06100')
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+        BoxLayout:
+
+            size_hint: 1, 0.3
+
+        BoxLayout:
+
+            spacing: 30
+            padding: [30, 30, 30, 30]
+            orientation: "vertical"
+            size: root.width, root.height
+            size_hint_x:
+            size_hint: 1, 0.5
+
+            Button:
+
+                background_normal: ''
+                background_color: C('#e06100')
+                pos_hint: {'center_x':0.5}
+                on_press: self.background_color = (1, 1, 1, 1)
+                on_release: self.background_color = C('#e06100')
+                font_name: 'ChunkFiveEx.ttf'
+                text: "Суточная утечка H2"
+                font_size: 50
+                fon_name: 'ChunkFiveEx.ttf'
+                color: C('#f7f7f7')
+                on_release:
+                    app.root.current = "second"
+                    root.manager.transition.direction = "left"
+
+            Button:
+
+                background_normal: ''
+                background_color: C('#e06100')
+                pos_hint: {'center_x':0.5}
+                on_press: self.background_color = (1, 1, 1, 1)
+                on_release: self.background_color = C('#e06100')
+                color: C('#f7f7f7')
+                text: "Изоляция ротора Г"
+                font_size: 50
+                font_name: 'ChunkFiveEx.ttf'
+                on_release:
+                    app.root.current = "second2"
+                    root.manager.transition.direction = "right"
+
+<FormulaH2>:
+
+    name: "second"
+    text_inputPs: text_inputPs
+    text_inputPf: text_inputPf
+    text_inputPn: text_inputPn
+    text_inputT: text_inputT
+    finish: finish
+
+    GridLayout:
+
+        rows:10
+        canvas.before:
+            Color:
+                rgba: C('#022136')
+            Rectangle:
+                pos:self.pos
+                size:self.size
+
+        BoxLayout:
+
+            size_hint: 0.3, 0.4
+            orientation: "vertical"
+            size: root.width, root.height
+            canvas.before:
+                Color:
+                    rgba: C('#e06100')
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            Label:
+
+                color: C('#022136')
+                font_name: 'AppetiteNew.ttf'
+                text: "Суточная утечка  H2"
+                font_size: 50
+                
+            Image:
+
+                source: 'formulaH2.png'
+                font_size:20
+                bold:True
+                size_hint_x: 1
+                size_hint_y: 1
+                allow_stretch: True
+
+        BoxLayout:
+
+            size_hint: 0.1, 0.1
+            padding: [30, 0, 0, 0]
+            orientation: "horizontal"
+            size: root.width, root.height
+
+            Image:
+
+                source: 'green.jpg'
+                text:"0 - 5"
+                bold:True
+                size_hint_x: 0.9
+                size_hint_y: 0.5
+                allow_stretch: True
+
+            Label:
+
+                halign: 'left'
+                valign: 'middle'
+                text_size: self.size
+                text:"0 - 5%"
+                size_hint_y: 0.5
+                font_size:30
+                font_name: 'ChunkFiveEx.ttf'
+                color: C('#f7f7f7')
+                bold:True
+
+            Image:
+
+                source: 'red.jpg'
+                bold:True
+                size_hint_x: 0.9
+                size_hint_y: 0.5
+                allow_stretch: True
+
+            Label:
+
+                halign: 'left'
+                valign: 'middle'
+                text_size: self.size
+                text:"более  5%"
+                size_hint_y: 0.5
+                font_size:30
+                font_name: 'ChunkFiveEx.ttf'
+                color: C('#f7f7f7')
+                bold:True
+
+        BoxLayout:
+
+            size_hint: 0.1, 0.08
+            padding: [10, 10, 10, 10]
+
+            Label:
+
+                id: finish
+                text: ' '
+                font_size: 50
+                font_name: 'ChunkFiveEx.ttf'
+                color: C('#f7f7f7')
+                size_hint: 0.1, 0.1
+
+        BoxLayout:
+            spacing: 10
+            padding: [0, 10, 0, 30]
+
+            orientation: "vertical"
+            size: root.width, root.height
+            size_hint_x: 50
+            size_hint: 0.6, 0.5
+
+
+            TextInput:
+
+
+                text_size: self.size
+                pos_hint: {'center_x':0.5}
+                hint_text:'Начальное Pн'
+                size_hint: 0.6, 0.4
+                id: text_inputPs
+                multiLine: False
+                input_type: 'number'
+                input_filter: 'float'
+                font_size: 40
+                font_name: 'ChunkFiveEx.ttf'
+
+            TextInput:
+
+                pos_hint: {'center_x':0.5}
+                size_hint: 0.6, 0.4
+                hint_text:'Конечное Pк'
+                id: text_inputPf
+                multiLine: False
+                input_type: 'number'
+                input_filter: 'float'
+                font_size: 40
+                font_name: 'ChunkFiveEx.ttf'
+
+            TextInput:
+
+                pos_hint: {'center_x':0.5}
+                size_hint: 0.6, 0.4
+                hint_text:'Номинальное P'
+                id: text_inputPn
+                multiLine: False
+                input_type: 'number'
+                input_filter: 'float'
+                font_size: 40
+                font_name: 'ChunkFiveEx.ttf'
+
+            TextInput:
+
+                pos_hint: {'center_x':0.5}
+                size_hint: 0.6, 0.4
+                hint_text:'Время Т'
+                id: text_inputT
+                multiLine: False
+                input_type: 'number'
+                input_filter: 'int'
+                font_size: 40
+                font_name: 'ChunkFiveEx.ttf'
+
+        BoxLayout:
+
+            size_hint: 1, 0.3
+
+        BoxLayout:
+
+            spacing: 10
+            size_hint: 0.6, 0.4
+            padding: [30, 0, 30, 30]
+            orientation: "vertical"
+            size: root.width, root.height
+
+            Button:
+
+                text: 'Очистить'
+                font_size: 40
+                font_name: 'ChunkFiveEx.ttf'
+                color: C('#f7f7f7')
+                point_hit:
+                background_normal: ''
+                background_color: C('#e06100')
+                pos_hint: {'center_x':0.5}
+                on_press: self.background_color = (1, 1, 1, 1)
+                on_release: self.background_color = C('#e06100')
+                on_release:
+                    root.clear_widgets()
+
+
+            Button:
+
+                text: 'Расчитать'
+                font_size: 40
+                font_name: 'ChunkFiveEx.ttf'
+                color: C('#f7f7f7')
+                point_hit:
+                background_normal: ''
+                background_color: C('#e06100')
+                pos_hint: {'center_x':0.5}
+                on_press: self.background_color = (1, 1, 1, 1)
+                on_release: self.background_color = C('#e06100')
+
+                on_release:
+                    root.calculate()
+            Button:
+
+
+                color: C('#f7f7f7')
+                text: "Назад"
+                font_size: 40
+                font_name: 'ChunkFiveEx.ttf'
+                point_hit:
+                background_normal: ''
+                background_color: C('#e06100')
+
+                pos_hint: {'center_x':0.5}
+                on_press: self.background_color = (1, 1, 1, 1)
+                on_release: self.background_color = C('#e06100')
+                on_release:
+                    app.root.current = "fist"
+                    root.manager.transition.direction = "right"
+
+<FormulaR>:
+    name: "second2"
+
+    text_inputRpr: text_inputRpr
+    text_inputU1: text_inputU1
+    text_inputU2: text_inputU2
+    text_inputU3: text_inputU3
+    finish_R: finish_R
+
+    GridLayout:
+        rows:10
+        canvas.before:
+            Color:
+                rgba: C('#022136')
+            Rectangle:
+                pos:self.pos
+                size:self.size
+
+        BoxLayout:
+            size_hint: 0.3, 0.5
+            orientation: "vertical"
+            size: root.width, root.height
+            pading: [10, 10, 10, 10]
+            canvas.before:
+                Color:
+                    rgba: C('#e06100')
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+
+
+            Label:
+                color: C('#022136')
+                font_name: 'AppetiteNew.ttf'
+                text: "Изоляция ротора Г"
+                font_size: 50
+            Image:
+
+                source: 'formula_R.png'
+                font_size:20
+                bold:True
+                size_hint: 1, 1
+                allow_stretch: True
+
+        BoxLayout:
+
+            size_hint: 0.1, 0.1
+            padding: [10, 0, 0, 0]
+            orientation: "horizontal"
+            size: root.width, root.height
+
+
+            Image:
+
+                source: 'green.jpg'
+                text:"0 - 5"
+                bold:True
+                size_hint_x: 0.9
+                size_hint_y: 0.5
+                allow_stretch: True
+
+            Label:
+
+                halign: 'left'
+                valign: 'middle'
+                text_size: self.size
+                text:"более 2кОм"
+                size_hint_y: 0.5
+                font_size:30
+                font_name: 'ChunkFiveEx.ttf'
+                color: C('#f7f7f7')
+                bold:True
+
+            Image:
+
+                source: 'red.jpg'
+                bold:True
+                size_hint_x: 0.9
+                size_hint_y: 0.5
+                allow_stretch: True
+
+            Label:
+                halign: 'left'
+                valign: 'middle'
+                text_size: self.size
+                text:"менее 2кОм"
+                size_hint_y: 0.5
+                font_size:30
+                font_name: 'ChunkFiveEx.ttf'
+                bold:True
+
+
+        BoxLayout:
+
+            size_hint: 0.1, 0.08
+            padding: [10, 10, 10, 10]
+
+            Label:
+                id: finish_R
+                text: ' '
+                font_size: 50
+                font_name: 'ChunkFiveEx.ttf'
+                color: C('#f7f7f7')
+                size_hint: 0.1, 0.1
+
+        BoxLayout:
+
+            spacing: 10
+            padding: [0, 10, 0, 30]
+            orientation: "vertical"
+            size: root.width, root.height
+            size_hint_x: 50
+            size_hint: 0.6, 0.5
+
+
+            TextInput:
+
+                id: text_inputRpr
+                text_size: self.size
+                pos_hint: {'center_x':0.5}
+                hint_text:'Изоляция прибора Rпр'
+                size_hint: 0.6, 0.4
+                multiLine: False
+                input_type: 'number'
+                input_filter: 'float'
+                font_size: 40
+                font_name: 'ChunkFiveEx.ttf'
+
+            TextInput:
+
+                id: text_inputU1
+                pos_hint: {'center_x':0.5}
+                size_hint: 0.6, 0.4
+                hint_text:'Полное напряжения U1'
+                multiLine: False
+                input_type: 'number'
+                input_filter: 'float'
+                font_size: 40
+                font_name: 'ChunkFiveEx.ttf'
+
+            TextInput:
+
+                id: text_inputU2
+                pos_hint: {'center_x':0.5}
+                size_hint: 0.6, 0.4
+                hint_text:'Напряжения (+) U2'
+                multiLine: False
+                input_type: 'number'
+                input_filter: 'float'
+                font_size: 40
+                font_name: 'ChunkFiveEx.ttf'
+
+            TextInput:
+
+                id: text_inputU3
+                pos_hint: {'center_x':0.5}
+                size_hint: 0.6, 0.4
+                font_name: 'ChunkFiveEx.ttf'
+                hint_text: 'Напряжения (-) U3'
+                multiLine: False
+                input_type: 'number'
+                input_filter: 'int'
+                font_size: 40
+
+        BoxLayout:
+
+            size_hint: 1, 0.3
+
+        BoxLayout:
+
+            spacing: 10
+            size_hint: 0.6, 0.4
+            padding: [30, 0, 30, 30]
+            orientation: "vertical"
+            size: root.width, root.height
+
+            Button:
+
+                background_normal: ''
+                background_color: C('#e06100')
+                pos_hint: {'center_x':0.5}
+                on_press: self.background_color = (1, 1, 1, 1)
+                on_release: self.background_color = C('#e06100')
+
+                color: C('#f7f7f7')
+                text: "Очистить"
+                font_size: 40
+                font_name: 'ChunkFiveEx.ttf'
+                on_release:
+                    root.clear_widgets()
+
+            Button:
+
+                background_normal: ''
+                background_color: C('#e06100')
+                pos_hint: {'center_x':0.5}
+                on_press: self.background_color = (1, 1, 1, 1)
+                on_release: self.background_color = C('#e06100')
+
+                color: C('#f7f7f7')
+                text: "Расчитать"
+                font_size: 40
+                font_name: 'ChunkFiveEx.ttf'
+
+                on_release:
+                    root.calculate_R()
+
+            Button:
+
+                background_normal: ''
+                background_color: C('#e06100')
+                pos_hint: {'center_x':0.5}
+                on_press: self.background_color = (1, 1, 1, 1)
+                on_release: self.background_color = C('#e06100')
+
+                color: C('#f7f7f7')
+                text: "Назад"
+                font_size: 40
+                font_name: 'ChunkFiveEx.ttf'
+                on_release:
+                    app.root.current = "fist"
+                    root.manager.transition.direction = "left"
